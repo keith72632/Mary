@@ -1,16 +1,18 @@
 #include "mode.h"
+#include "handlers.h"
 /*TCSAFLUSH waits for all pending output to be written to terminal*/
 
 struct termios orig_termios;
 
 void disableRawMode()
 {
-    tcsetattr(STDERR_FILENO, TCSAFLUSH, &orig_termios);
+    if(tcsetattr(STDERR_FILENO, TCSAFLUSH, &orig_termios) == -1)
+        die("tcsetattr");
 }
 
 void enableRawMode() 
 {
-    tcgetattr(STDIN_FILENO, &orig_termios);
+    if(tcgetattr(STDIN_FILENO, &orig_termios) == -1) die("tcgetattr");
     atexit(disableRawMode);   
     // ECHO == 00000000000000000000000000001000b. Each key typed printed to terminal. Needs to be disabled
     // ICANON. "Canonical input". disabling this kills process when pressing q without enter
