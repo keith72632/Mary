@@ -12,7 +12,7 @@ all: run
 mary.o: mary.c
 	${CC} ${FLAGS} -c $^ -o $@
 
-mary: mary.o
+mary: ${SRCS} ${HEADERS}
 	${CC} $^ -o $@
 
 run: mary
