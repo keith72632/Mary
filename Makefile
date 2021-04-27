@@ -9,11 +9,11 @@ all: run
 %.o: %.c
 	${CC} ${FLAGS} -c $^ -o $@
 
-puke: ${OBJS} ${HEADERS}
+mary: mary.o
 	${CC} $^ -o $@
 
-run: puke
+run: mary
 	./$^
 
 clean:
-	rm *.o puke
+	rm *.o mary
