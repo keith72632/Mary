@@ -11,6 +11,18 @@ struct editorConfig {
   	struct termios orig_termios;
 };
 
+// Map keypress to number high enough it doesn't conflict with character type
+enum editorKey {
+	ARROW_LEFT  = 1000,
+	ARROW_RIGHT,
+	ARROW_UP,
+	ARROW_DOWN,
+	DEL_KEY,
+	HOME_KEY,
+	END_KEY,
+	PAGE_UP,
+	PAGE_DOWN
+};
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
@@ -20,10 +32,12 @@ void disableRawMode();
 
 void enableRawMode();
 
-char editorReadKey();
+int editorReadKey();
 
 int getCursorPosition(int *rows, int *cols);
 
 int getWindowSize(int *rows, int *cols);
+
+void initEditor();
 
 #endif
