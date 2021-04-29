@@ -3,11 +3,18 @@
 #define CTRL_KEY(k) ((k) & 0x1f)
 #define MARY_VERSION "0.0.1"
 
+//editor row
+typedef struct erow {
+	int size;
+	char *chars;
+} erow;
 
 struct editorConfig {
 	int cx, cy;
 	int screenrows;
  	int screencols;
+	int numrows;
+	erow rows;
   	struct termios orig_termios;
 };
 

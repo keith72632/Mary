@@ -11,6 +11,7 @@
 #include "terminal.h"
 #include "output.h"
 #include "input.h"
+#include "fileio.h"
 
 
 struct editorConfig E;
@@ -25,6 +26,7 @@ struct editorConfig E;
 int main() {
   	enableRawMode();
   	initEditor();
+	editorOpen();
 
   	while (1) {
     	editorRefreshScreen();

@@ -64,5 +64,18 @@ void editorProcessKeypress() {
         case ARROW_RIGHT:
             editorMoveCursor(c);
             break;
+        
+        case CTRL_KEY('k'):
+            E.cy = 0;
+            break;
+        case CTRL_KEY('j'):
+            E.cy = E.screenrows - 1;
+            break;
+        case CTRL_KEY('h'):
+            E.cx = 0;
+            break;
+        case CTRL_KEY('l'):
+            E.cx = E.screencols -1;
+            break;
 	}
 }

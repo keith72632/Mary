@@ -121,6 +121,7 @@ int getCursorPosition(int *rows, int *cols) {
 	char buf[32];
 	unsigned int i = 0;
 
+	//\x1b[6n is a device status report
 	if (write(STDOUT_FILENO, "\x1b[6n", 4) != 4) return -1;
 	while (i < sizeof(buf) - 1) {
 		if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
@@ -137,7 +138,7 @@ int getCursorPosition(int *rows, int *cols) {
 
 int getWindowSize(int *rows, int *cols) {
   	struct winsize ws;
-
+	//The ioctl number(TIOCGWINSZ) encodes the major device number, the type of the ioctl, the command, and the type of the parameter.
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0) {
 		// B and C escape characters move the cursor 
     	if (write(STDOUT_FILENO, "\x1b[999C\x1b[999B", 12) != 12) return -1;
@@ -154,5 +155,6 @@ int getWindowSize(int *rows, int *cols) {
 void initEditor() {
 	E.cx = 0;
 	E.cy = 0;
+	E.numrows = 0;
   	if (getWindowSize(&E.screenrows, &E.screencols) == -1) die("getWindowSize");
 }
