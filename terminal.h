@@ -3,7 +3,7 @@
 #define CTRL_KEY(k) ((k) & 0x1f)
 #define MARY_VERSION "0.0.1"
 
-//editor row
+//editor row. pointer to specific row
 typedef struct erow {
 	int size;
 	char *chars;
@@ -30,6 +30,7 @@ enum editorKey {
 	PAGE_UP,
 	PAGE_DOWN
 };
+
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
