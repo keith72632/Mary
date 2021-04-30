@@ -14,7 +14,8 @@ struct editorConfig {
 	int screenrows;
  	int screencols;
 	int numrows;
-	erow rows;
+	//array of erow struct for multiple lines. Needs initialized to NULL later
+	erow *rows;
   	struct termios orig_termios;
 };
 

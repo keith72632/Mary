@@ -16,7 +16,8 @@ void editorDrawRows(struct abuf *ab)
 	for (y = 0; y < E.screenrows; y++) {
 		if(y >= E.numrows)
 		{
-			if (y == E.screenrows / 3) {
+			//if no file, print welcome message
+			if (E.numrows == 0 && y == E.screenrows / 3) {
 				char welcome[80];
 				int welcomelen = snprintf(welcome, sizeof(welcome),
 					"Mary editor -- version %s", MARY_VERSION);
@@ -30,13 +31,13 @@ void editorDrawRows(struct abuf *ab)
 				while (padding--) abAppend(ab, " ", 1);
 				abAppend(ab, welcome, welcomelen);
 
-				} else {
-					abAppend(ab, "~", 1);
-				}
+			} else {
+				abAppend(ab, "~", 1);
+			}
 		} else {
-			int len = E.rows.size;
+			int len = E.rows[y].size;
 			if(len > E.screencols) len = E.screencols;
-			abAppend(ab, E.rows.chars, len);
+			abAppend(ab, E.rows[y].chars, len);
 		}
 
 				abAppend(ab, "\x1b[K", 3);
