@@ -21,7 +21,7 @@ void editorMoveCursor(int key)
                 E.cx++;
             break;
         case ARROW_DOWN:
-            if(E.cy < E.screenrows - 1)
+            if(E.cy < E.numrows)
                 E.cy++;
             break;
         case ARROW_UP:
