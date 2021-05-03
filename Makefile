@@ -18,5 +18,8 @@ mary: ${SRCS}
 run: mary
 	./mary 
 
+test: mary
+	./mary test.txt
+
 clean:
 	rm *.o mary

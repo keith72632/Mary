@@ -11,14 +11,28 @@ extern struct editorConfig E;
 
 void editorMoveCursor(int key)
 {
+    //checks to see if cursor is on valid line
+    erow *row = (E.cy >= E.numrows) ? NULL : &E.rows[E.cy];
     switch(key){
         case ARROW_LEFT:
             if(E.cx != 0)
                 E.cx--;
+            //Moves cursor to end of previous line if cursor is at 0 on x-axis of current line
+            else if(E.cy > 0)
+            {
+                E.cy--;
+                E.cx = E.rows[E.cy].size;
+            }
             break;
         case ARROW_RIGHT:
-            if(E.cx < E.screencols -1)
+            if(row && E.cx < row->size)
                 E.cx++;
+            //move cursor to beginning of next line if at the end of current line
+            else if(row && E.cx == row->size)
+            {
+                E.cy++;
+                E.cx = 0;
+            }
             break;
         case ARROW_DOWN:
             if(E.cy < E.numrows)
@@ -29,6 +43,12 @@ void editorMoveCursor(int key)
                 E.cy--;
             break;
     }
+
+    //this sets cursor to the end of the line when moving down along y-axis
+    row = (E.cy >= E.numrows) ? NULL : &E.rows[E.cy];
+    int rowlen = row ? row->size : 0;
+    if(E.cx > rowlen)
+        E.cx = rowlen;
 }
 
 void editorProcessKeypress() {
