@@ -158,6 +158,6 @@ void initEditor() {
 	E.rowoff = 0;
 	E.coloff = 0;
 	E.numrows = 0;
-	E.rows = NULL;
+	E.row = NULL;
   	if (getWindowSize(&E.screenrows, &E.screencols) == -1) die("getWindowSize");
 }

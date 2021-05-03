@@ -19,7 +19,7 @@ run: mary
 	./mary 
 
 test: mary
-	./mary test.txt
+	./mary Makefile
 
 clean:
 	rm *.o mary

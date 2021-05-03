@@ -12,7 +12,7 @@ extern struct editorConfig E;
 void editorMoveCursor(int key)
 {
     //checks to see if cursor is on valid line
-    erow *row = (E.cy >= E.numrows) ? NULL : &E.rows[E.cy];
+    erow *row = (E.cy >= E.numrows) ? NULL : &E.row[E.cy];
     switch(key){
         case ARROW_LEFT:
             if(E.cx != 0)
@@ -21,7 +21,7 @@ void editorMoveCursor(int key)
             else if(E.cy > 0)
             {
                 E.cy--;
-                E.cx = E.rows[E.cy].size;
+                E.cx = E.row[E.cy].size;
             }
             break;
         case ARROW_RIGHT:
@@ -45,7 +45,7 @@ void editorMoveCursor(int key)
     }
 
     //this sets cursor to the end of the line when moving down along y-axis
-    row = (E.cy >= E.numrows) ? NULL : &E.rows[E.cy];
+    row = (E.cy >= E.numrows) ? NULL : &E.row[E.cy];
     int rowlen = row ? row->size : 0;
     if(E.cx > rowlen)
         E.cx = rowlen;

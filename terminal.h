@@ -1,12 +1,15 @@
 #include <termios.h>
 
 #define CTRL_KEY(k) ((k) & 0x1f)
+#define TAB_STOP 4
 #define MARY_VERSION "0.0.1"
 
 //editor row. pointer to specific row
 typedef struct erow {
 	int size;
+	int rsize;
 	char *chars;
+	char *render; // Contains the actual characters to be rendered on screen
 } erow;
 
 struct editorConfig {
@@ -17,7 +20,7 @@ struct editorConfig {
  	int screencols;
 	int numrows;
 	//array of erow struct for multiple lines. Needs initialized to NULL later
-	erow *rows;
+	erow *row;
   	struct termios orig_termios;
 };
 
