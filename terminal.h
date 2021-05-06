@@ -1,4 +1,6 @@
 #include <termios.h>
+#include <time.h>
+#include <stdarg.h>
 
 #define CTRL_KEY(k) ((k) & 0x1f)
 #define TAB_STOP 4
@@ -13,7 +15,10 @@ typedef struct erow {
 } erow;
 
 struct editorConfig {
+	//cx and cy are indexes to chars
 	int cx, cy;
+	//index to render field. If no tabs (render), then rx same as cx
+	int rx;
 	int rowoff;
 	int coloff;
 	int screenrows;
@@ -21,6 +26,9 @@ struct editorConfig {
 	int numrows;
 	//array of erow struct for multiple lines. Needs initialized to NULL later
 	erow *row;
+	char *filename;
+	char statusmsg[80];
+	time_t statusmsg_time;
   	struct termios orig_termios;
 };
 

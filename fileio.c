@@ -5,6 +5,19 @@
 #include "terminal.h"
 extern struct editorConfig E;
 
+int editorRowCxToRx(erow *row, int cx)
+{
+    int rx = 0;
+    int j;
+    for(j = 0; j < cx; j++)
+    {
+        if(row->chars[j] == '\t')
+            rx += (TAB_STOP -1 ) - (rx % TAB_STOP);
+        rx++;
+    }
+    return rx;
+}
+
 void editorUpdateRow(erow *row)
 {
     int tabs = 0;
@@ -53,6 +66,10 @@ void editorAppendRow(char *s, size_t len)
 
 void editorOpen(char *filename)
 {
+    free(E.filename);
+    //strdup returns a pointer to a null terminated byte string. Used here to point E.filename to open file
+    E.filename = strdup(filename);
+
     FILE *fp = fopen(filename, "r");
     if(!fp) die("fopen");
 

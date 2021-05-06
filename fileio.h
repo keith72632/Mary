@@ -7,5 +7,6 @@
 //#define _GNU_SOURCE
 
 void editorOpen();
+int editorRowCxToRx(erow *row, int cx);
 
 #endif

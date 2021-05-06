@@ -4,5 +4,6 @@
 void editorDrawRows();
 void editorRefreshScreen();
 void editorProcessKeypress();
+void editorStatusMsg(const char *fmt, ...);
 
 #endif
